@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter Button</title>
+    <style>
+      body {
+        background-color: rgb(40, 40, 114);
+        color: beige;
+        margin: 10px;
+        padding: 10px;
+      }
+    </style>
+    <script>
+      // we have define the component and React will take care of re-rendering.
+
+      // dynamic object
+      let state = {
+        count: 0,
+      };
+
+      function buttonComponentReRender() {
+        document.getElementById(
+          "btnElement"
+        ).innerHTML = `Counter ${state.count}`;
+      }
+
+      function increaseCounter() {
+        // change the button counter
+        state.count += 1;
+        // re-render the button component
+        buttonComponentReRender();
+      }
+
+      function buttonComponent(state) {
+        let counterVal = state.count;
+        const btn = document.createElement("button");
+        btn.setAttribute("id", "btnElement");
+        btn.setAttribute(
+          "style",
+          "font-weight : bold; font-size : 15px; border-radius : 8px; padding : 10px; border : 2px solid white; "
+        );
+        btn.setAttribute("onclick", "increaseCounter ()");
+        btn.innerHTML = `Counter ${counterVal}`;
+        return btn;
+      }
+
+      // Run once, when the DOM is ready
+      window.onload = function () {
+        const btn = buttonComponent(state);
+        document.getElementById("parentContainer").appendChild(btn);
+      };
+    </script>
+  </head>
+  <body>
+    <div id="parentContainer"></div>
+  </body>
+</html>
+
+<!-- 
+1). Define the state (dynamic object)
+2). Define the buttonComponent (state) which takes state as an argument
+3). When on clicking the button, DOM manipulation takes place and dynamic component of the btn changes
+4). In general, re-rendering of state is managed by React
+  -->

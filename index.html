@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter Button</title>
+    <style>
+        body {
+            background-color: #1f1f1f;
+            color: beige;
+            font-size: x-large;
+            font-weight: bolder;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="btn" onclick="increaseCounter()">Counter 0</button>
+    </div>
+
+    <script>
+        function increaseCounter () {
+        const btnData = document.getElementById('btn').innerHTML;
+        const ctrBtn = btnData.split(' ')[1]; // string
+        const newCtr = parseInt (ctrBtn) + 1; // int
+        document.getElementById('btn').innerHTML = "Counter " + newCtr;
+        }
+    </script>
+</body>
+</html>
