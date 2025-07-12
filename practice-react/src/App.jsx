@@ -1,11 +1,20 @@
 import React, {useState, useEffect} from 'react';
 
 // App -> Component
+// conditional rendering
 function App() {
+  const [timerVisible, settimerVisible] = useState(true);
+
+  useEffect(function () {
+    setInterval( () => {
+      settimerVisible(prev = !prev);
+    }, 5000)
+  }, [])
+
   return (
     <div>
        <Counter></Counter>
-       <Timer></Timer>
+       {timerVisible && <Timer></Timer>}
     </div>
   )
 }
@@ -67,6 +76,7 @@ function Timer () {
     </div>
   )
 }
+// dependency array, cleanup, fetch inside useEffect hook
 
 // React will triggers re-rendering Timer Component whenever there is change in state of the Component.
 // Everytime there is change in state React will re-rnder the counter component.
