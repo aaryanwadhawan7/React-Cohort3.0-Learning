@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function App() {
   return (
   <div style={{display : "flex", justifyContent : "center", flexDirection : "column"}}>
@@ -7,6 +9,7 @@ function App() {
   followerCount = {"20,000 followers"}
   time = {"12 min"}
   ></PostComponent>
+  <Notification></Notification>
   </div>
   <br></br>
   <div style={{backgroundColor : "#4682B4", margin : 20, width : 400, padding : 10, borderRadius : 15}}>
@@ -14,6 +17,7 @@ function App() {
   username = {"Kiwi Wadhawan"}
   followerCount = {"Promoted"}
   ></PostComponent>
+  <Notification></Notification>
   </div>
   </div>
   )
@@ -21,6 +25,33 @@ function App() {
 
 // Structuring your app into components
 // Defining a state of your application
+
+const Notification = () => {
+  // Defining a state variable
+  // Component will only re-reder when there is a state variable
+
+  const [notificationCount, setNotificationCount] = useState (0);
+  // [0, function ()]
+  
+  function increment () {
+    setNotificationCount(notificationCount+1);
+  }
+
+  const style = {backgroundColor : "#1f1f1f",
+    color : "beige",
+    borderRadius : 8,
+    padding : 8,
+    margin : 5,
+    border : "10px solid #1f1f1f"
+  }
+  return (
+    <div>
+      <button onClick={increment} style={style}>Chats {notificationCount}</button>
+    </div>
+  )
+
+}
+
 
 const style = {
   width: 200,
