@@ -7,17 +7,20 @@ import { useState, useEffect } from "react";
 
 export function useFetch(url) {
   const [finalData, setFinalData] = useState({});
+  const [loading, setLoading] = useState (true);
 
   useEffect(() => {
+    setLoading (true);
     async function getData() {
       const res = await fetch(url);
       const json = await res.json();
       setFinalData(json);
+      setLoading (false);
     }
 
     getData();
   }, [url]);
 
   // you have passed finalData (state) as an object you have to import this as an object
-  return { finalData };
+  return { finalData, loading };
 }

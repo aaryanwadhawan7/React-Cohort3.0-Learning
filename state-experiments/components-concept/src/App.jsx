@@ -17,11 +17,29 @@ function BulbProvider({ children }) {
 }
 
 function App() {
-  const [postNo, setCurretPostNo] = useState (1);
+  const [postNo, setCurretPostNo] = useState(1);
   const postTitle = usePostTitle();
-  const {finalData}  = useFetch(
+  const { finalData, loading } = useFetch(
     "https://jsonplaceholder.typicode.com/todos/" + postNo
   );
+
+  // before component re-renders we need to add loading logic to codebase
+  if (loading) {
+    return (
+      <div>
+        <span
+          style={{
+            color: "beige",
+            fontSize: 30,
+            margin: 10,
+            padding: 10,
+          }}
+        >
+          Loading...
+        </span>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -54,7 +72,7 @@ function App() {
         <button onClick={() => setCurretPostNo(1)}>Post 1</button>
         <button onClick={() => setCurretPostNo(2)}>Post 2</button>
         <button onClick={() => setCurretPostNo(3)}>Post 3</button>
-        <div style={{color : "beige"}}>{JSON.stringify(finalData)}</div>
+        <div style={{ color: "beige" }}>{JSON.stringify(finalData)}</div>
       </div>
     </div>
   );
