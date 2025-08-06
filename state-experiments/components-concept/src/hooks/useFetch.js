@@ -16,7 +16,7 @@ export function useFetch(url) {
     }
 
     getData();
-  }, []);
+  }, [url]);
 
   // you have passed finalData (state) as an object you have to import this as an object
   return { finalData };

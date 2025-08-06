@@ -17,9 +17,10 @@ function BulbProvider({ children }) {
 }
 
 function App() {
+  const [postNo, setCurretPostNo] = useState (1);
   const postTitle = usePostTitle();
-  const { finalData } = useFetch(
-    "https://jsonplaceholder.typicode.com/todos/2"
+  const {finalData}  = useFetch(
+    "https://jsonplaceholder.typicode.com/todos/" + postNo
   );
 
   return (
@@ -47,6 +48,13 @@ function App() {
         }}
       >
         {JSON.stringify(finalData)}
+      </div>
+
+      <div>
+        <button onClick={() => setCurretPostNo(1)}>Post 1</button>
+        <button onClick={() => setCurretPostNo(2)}>Post 2</button>
+        <button onClick={() => setCurretPostNo(3)}>Post 3</button>
+        <div style={{color : "beige"}}>{JSON.stringify(finalData)}</div>
       </div>
     </div>
   );
