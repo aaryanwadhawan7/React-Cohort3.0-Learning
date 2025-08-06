@@ -4,6 +4,8 @@ import { useState, createContext, useContext, Children } from "react";
 import { Counter } from "./Counter";
 import { usePostTitle } from "./hooks/usePostTitle";
 import { useFetch } from "./hooks/useFetch";
+import { usePrev } from "./hooks/usePrev";
+
 const BulbContext = createContext();
 
 function BulbProvider({ children }) {
@@ -19,6 +21,9 @@ function BulbProvider({ children }) {
 function App() {
   const [postNo, setCurretPostNo] = useState(1);
   const postTitle = usePostTitle();
+  const [state, setState] = useState (0);
+  const prev = usePrev (state);
+
   const { finalData, loading } = useFetch(
     "https://jsonplaceholder.typicode.com/todos/" + postNo
   );
@@ -40,6 +45,7 @@ function App() {
       </div>
     );
   }
+
 
   return (
     <div>
@@ -73,6 +79,14 @@ function App() {
         <button onClick={() => setCurretPostNo(2)}>Post 2</button>
         <button onClick={() => setCurretPostNo(3)}>Post 3</button>
         <div style={{ color: "beige" }}>{JSON.stringify(finalData)}</div>
+      </div>
+
+      <div>
+        <p style={{color : "whitesmoke"}}>{state}</p>
+        <button onClick={() => {
+          setState((curr) => curr + 1);
+        }}>Click Me</button>
+        <p style={{color : "whitesmoke"}}>The prev val was {prev != undefined ? prev : "N/A"}</p>
       </div>
     </div>
   );
