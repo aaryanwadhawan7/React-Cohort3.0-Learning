@@ -21,3 +21,12 @@ It is used to write HTML-like code directly within the Javascript.
 - State (Done), 
 - Components (Done), 
 - re-rendering (Done)
+- Class-based Components vs Functional Components
+- Error Boundary (only in class-based components)
+- Fragments
+
+<br>
+Lists in React : 
+While rendering list in React Component, it is advised to give unique key to each list element
+
+- Custom Hooks -> state-experiments\components-concept\src\Counter.jsx

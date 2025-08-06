@@ -12,10 +12,15 @@ function App() {
   }, [])
 
   return (
+    <>
     <div>
        <Counter></Counter>
        {timerVisible && <Timer></Timer>}
     </div>
+    <div>
+      <Bulb></Bulb>
+    </div>
+    </>
   )
 }
 
@@ -82,4 +87,45 @@ function Timer () {
 // Everytime there is change in state React will re-rnder the counter component.
 // This will effect the functioning of setInterval() fn.
 
-export default App
+
+
+// Rolling up the state, unoptimal re-renders
+// As ur application grows u wil find that multiple components need access to the same state.
+// Instead of duplicating state in each component, you can lift the state up to the Lowest Common Ancestor 
+// allowing the common ancestor to manage it.
+
+function BulbState ({currBulbState}) {
+
+  const bulbStatus = (currBulbState) ? "Bulb is On!" : "Bulb is Off!";
+
+  return (
+    <>
+      <span>{bulbStatus}</span>
+    </>
+  )
+}
+
+
+function ToggleBulb ({currBulbState, toggleBulbState}) { 
+
+  function toggleStatus () {
+    toggleBulbState (!currBulbState);
+
+  }
+  return (
+    <button onClick={toggleStatus}>Toggle Bulb</button>
+  )
+}
+
+
+function Bulb () {
+  const [bulbState, setBulbState] = useState (true);
+  return (
+    <>
+      <BulbState currBulbState = {bulbState}></BulbState>
+      <ToggleBulb currBulbState = {bulbState} toggleBulbState = {setBulbState}></ToggleBulb>
+    </>
+  )
+}
+
+export default App;
